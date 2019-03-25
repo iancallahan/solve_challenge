@@ -18,14 +18,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/profile', 'UserController@edit')->name('profile');
 
-Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
-    Route::get('users', 'AdminUserController@index')->name('user.index');
-    Route::get('user/create', 'AdminUserController@create')->name('user.create');
-    Route::post('user/create', 'AdminUserController@store')->name('user.store');
-    Route::get('user/{id}', 'AdminUserController@edit')->name('user.edit');
-    Route::post('user/{id}', 'AdminUserController@update')->name('user.update');
+Route::get('profile', 'UserController@edit')->middleware('auth')->name('profile.edit');
+Route::post('profile', 'UserController@update')->middleware('auth')->name('profile.update');
+Route::get('biography', 'UserController@fetchBiography')->middleware('auth')->name('biography');
+Route::post('biography', 'UserController@updateBiography')->middleware('auth')->name('biography.update');
+Route::post('headshot', 'UserController@updateHeadshot')->middleware('auth')->name('headshot.update');
+
+Route::name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('users', 'AdminUserController');
+    Route::get('users/{user}/biography', 'AdminUserController@fetchBiography')->middleware('auth')->name('biography');
+    Route::post('users/{user}/biography', 'AdminUserController@updateBiography')->middleware('auth')->name('biography.update');
+    Route::post('users/{user}/headshot', 'AdminUserController@updateHeadshot')->middleware('auth')->name('headshot.update');
 });
     
 

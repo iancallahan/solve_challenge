@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Form;
 
 class FormServiceProvider extends ServiceProvider
 {
@@ -23,7 +24,9 @@ class FormServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Form::component('inputBlock', 'components.form.input_block', ['resource', 'name', 'niceName', 'attributes' => []]);
-        Form::component('textareaBlock', 'components.form.textarea_block', ['resource', 'name', 'niceName', 'attributes' => []]);
+        Form::component('inputBlock', 'components.forms.input_block', ['resource', 'name', 'niceName', 'attributes' => []]);
+        Form::component('textareaBlock', 'components.forms.textarea_block', ['resource', 'name', 'niceName', 'attributes' => []]);
+        Form::component('passwordBlock', 'components.forms.password_block', ['resource', 'name', 'niceName', 'attributes' => []]);
+        Form::component('fileBlock', 'components.forms.file_block', ['resource', 'name', 'niceName', 'attributes' => []]);
     }
 }

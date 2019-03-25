@@ -27,7 +27,7 @@ class AdminUserController extends Controller
         }
 
         if (request()->has('sort')){
-          $query = User::orderBy('name', request('sort'));
+          $query = User::orderBy('created_at', request('sort'));
         }
 
         $users = $query->paginate('10')->appends($appendParameters);

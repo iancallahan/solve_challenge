@@ -2,8 +2,8 @@
 <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th class="col-md-1">Created</th>
-        <th class="col-md-2">Name<a id="sortAsc" href="{{route(Route::currentRouteName(), ['sort' => 'asc'])}}"><i class="fa fa-sort-asc" aria-hidden="true"></i></a><a id="sortDesc" href="{{route(Route::currentRouteName(), ['sort' => 'desc'])}}"><i class="fa fa-sort-desc" aria-hidden="true"></i></a></th>
+        <th class="col-md-1">Created <a id="sortAsc" href="{{route(Route::currentRouteName(), ['sort' => 'asc'])}}"><i class="fa fa-sort-asc" aria-hidden="true"></i></a><a id="sortDesc" href="{{route(Route::currentRouteName(), ['sort' => 'desc'])}}"><i class="fa fa-sort-desc" aria-hidden="true"></i></a></th>
+        <th class="col-md-2">Name</th>
         <th class="col-md-1"><a href="{{{ route('admin.users.create') }}}" class="btn btn-primary"><span class="glyphicon"></span>Create User</a></th>
       </tr>
     </thead>

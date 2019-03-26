@@ -175,8 +175,15 @@ class AdminUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        session()->flash('alert_class', 'success');
+        session()->flash('alert_message', 'User deleted.');
+        return response()->json([
+          'user' => $user->id,
+          'status' => 'deleted'
+        ]);
     }
 }

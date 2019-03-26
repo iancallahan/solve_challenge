@@ -15,7 +15,7 @@
           <td>{{$user->name}}</td>
           <td>
             <a href="{{{ URL::route('admin.users.edit', $user->id) }}}" class="btn btn-default btn-xs">Edit</a>
-            <a href="{{{ URL::route('admin.users.destroy', $user->id) }}}" data-resource="event" data-resource_id="{{$user->id}}" class="btn btn-danger btn-xs btn-delete">Delete</a>
+            <a href="{{{ URL::route('admin.users.destroy', $user->id) }}}" data-resource="user" data-resource_id="{{$user->id}}" class="btn btn-danger btn-xs btn-delete">Delete</a>
           </td>
         </tr>
       @endforeach

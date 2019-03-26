@@ -40,12 +40,12 @@ class NewUser extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url('/users/'. $this->user->id);
+        $url = url('/users/'. $this->user->id . '/edit');
 
         return (new MailMessage)
-                    ->line("A new user has been added to Ian Callahan's demo application")
+                    ->line("A new user, " . $this->user->name . ", has been added to Ian Callahan's demo application")
                     ->action('Edit User', $url)
-                    ->line('Thank you for using our application!');
+                    ->line('Thank you checking out this demo.');
     }
 
     /**

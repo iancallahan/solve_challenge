@@ -23,7 +23,7 @@ class UserTableSeeder extends Seeder
        $admin = App\User::find('1');
        $admin->roles()->attach(App\Role::where('name','admin')->first());
 
-       factory(App\User::class, 50)->create()->each(function ($u) {
+       factory(App\User::class, 25)->create()->each(function ($u) {
         $u->roles()->attach(App\Role::where('name','contributor')->first());
       });
     }

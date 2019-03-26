@@ -111,6 +111,10 @@ class AdminUserController extends Controller
         $request->validate([
             'headshot' => 'required|image|max:2048'
         ]);
+        
+        if (!empty($user->headshot)){
+            $store = Storage::disk('public')->delete('images/headshots/' . basename($user->headshot));
+        }
 
         if ($request->hasFile('headshot')){
             $file = $request->file('headshot');

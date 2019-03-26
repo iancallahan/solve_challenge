@@ -89,7 +89,7 @@ class UserController extends Controller
         return view('profile.form', ['user' => $user, 'biographyRoute' => $biographyRoute, 'userID' => $userID]);
     }
 
-    function fetchBiography(Request $request, $id = null) {
+    function fetchBiography(Request $request) {
         $user = User::find($request->user()->id);
         if(empty($user->bio)){
             return response()->json("");
@@ -97,7 +97,7 @@ class UserController extends Controller
         return response()->json($user->bio);
     }
 
-    function updateBiography(Request $request, $id = null) {
+    function updateBiography(Request $request) {
         $user = User::find($request->user()->id);
         $request->validate([
             'bio' => 'max:' . $request->input('maxLength'),
@@ -108,13 +108,17 @@ class UserController extends Controller
         return response()->json($user->bio);
     }
     
-    function updateHeadshot(Request $request, $id = null) {
+    function updateHeadshot(Request $request) {
         
         $request->validate([
             'headshot' => 'required|image|max:2048'
         ]);
 
         $user = User::find($request->user()->id);
+        
+        if (!empty($user->headshot)){
+            $store = Storage::disk('public')->delete('images/headshots/' . basename($user->headshot));
+        }
 
         if ($request->hasFile('headshot')){
             $file = $request->file('headshot');
@@ -141,7 +145,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id = null)
+    public function update(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
